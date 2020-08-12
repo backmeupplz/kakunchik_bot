@@ -1,12 +1,19 @@
-import { prop, getModelForClass } from '@typegoose/typegoose'
+import {
+  prop,
+  getModelForClass,
+  mongoose,
+  modelOptions,
+  Severity,
+} from '@typegoose/typegoose'
 
 type PoopedObject = { [index: string]: number }
 
+@modelOptions({ options: { allowMixed: Severity.ALLOW } })
 export class User {
   @prop({ required: true, index: true, unique: true })
   id: number
 
-  @prop({ required: true, default: {} })
+  @prop({ type: mongoose.Schema.Types.Mixed })
   pooped: PoopedObject
 }
 

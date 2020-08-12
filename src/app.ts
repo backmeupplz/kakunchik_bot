@@ -24,13 +24,17 @@ bot.on('sticker', async (ctx) => {
     const todayString = `${today.getFullYear()}-${
       today.getMonth() + 1
     }-${today.getDate()}`
-    const pooped = ctx.dbuser.pooped
+    let pooped = ctx.dbuser.pooped
+    if (!pooped) {
+      pooped = {}
+    }
     if (pooped[todayString]) {
       pooped[todayString]++
     } else {
       pooped[todayString] = 1
     }
     ctx.dbuser.pooped = pooped
+    ctx.dbuser.markModified('pooped')
     await ctx.dbuser.save()
     return ctx.reply(
       `Количество каканий сегодня: ${ctx.dbuser.pooped[todayString]}.`
