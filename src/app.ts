@@ -5,22 +5,38 @@ dotenv.config({ path: `${__dirname}/../.env` })
 import { bot } from './helpers/bot'
 import { checkTime } from './middlewares/checkTime'
 import { setupHelp } from './commands/help'
-import { setupI18N } from './helpers/i18n'
-import { setupLanguage } from './commands/language'
 import { attachUser } from './middlewares/attachUser'
 
 // Check time
 bot.use(checkTime)
 // Attach user
 bot.use(attachUser)
-// Setup localization
-setupI18N(bot)
 // Setup commands
 setupHelp(bot)
-setupLanguage(bot)
 
 // Start bot
 bot.startPolling()
+
+bot.on('sticker', async (ctx) => {
+  const sticker = ctx.message.sticker
+  if ((sticker as any).file_unique_id === 'AgADIwADtEzqKA') {
+    const today = new Date()
+    const todayString = `${today.getFullYear()}-${
+      today.getMonth() + 1
+    }-${today.getDate()}`
+    const pooped = ctx.dbuser.pooped
+    if (pooped[todayString]) {
+      pooped[todayString]++
+    } else {
+      pooped[todayString] = 1
+    }
+    ctx.dbuser.pooped = pooped
+    await ctx.dbuser.save()
+    return ctx.reply(
+      `Количество каканий сегодня: ${ctx.dbuser.pooped[todayString]}.`
+    )
+  }
+})
 
 // Log
 console.info('Bot is up and running')

@@ -1,12 +1,13 @@
-// Dependencies
 import { prop, getModelForClass } from '@typegoose/typegoose'
+
+type PoopedObject = { [index: string]: number }
 
 export class User {
   @prop({ required: true, index: true, unique: true })
   id: number
 
-  @prop({ required: true, default: 'en' })
-  language: string
+  @prop({ required: true, default: {} })
+  pooped: PoopedObject
 }
 
 // Get User model
