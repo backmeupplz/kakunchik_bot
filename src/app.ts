@@ -19,7 +19,13 @@ bot.startPolling()
 
 bot.on('sticker', async (ctx) => {
   const sticker = ctx.message.sticker
-  if ((sticker as any).file_unique_id === 'AgADIwADtEzqKA') {
+  const poopStickers = [
+    'AgADIwADtEzqKA',
+    'AgADVAADtEzqKA',
+    'AgADUwADtEzqKA',
+    'AgADUgADtEzqKA',
+  ]
+  if (poopStickers.includes((sticker as any).file_unique_id)) {
     const today = new Date()
     const todayString = `${today.getFullYear()}-${
       today.getMonth() + 1
