@@ -24,6 +24,7 @@ bot.on('sticker', async (ctx) => {
     'AgADVAADtEzqKA',
     'AgADUwADtEzqKA',
     'AgADUgADtEzqKA',
+    'AgADvwIAAh_2ths',
   ]
   if (poopStickers.includes((sticker as any).file_unique_id)) {
     const today = new Date()
