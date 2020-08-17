@@ -20,10 +20,17 @@ bot.startPolling()
 bot.on('sticker', async (ctx) => {
   const sticker = ctx.message.sticker
   const poopStickers = [
+    // https://t.me/addstickers/peepo_pack
     'AgADIwADtEzqKA',
-    'AgADVAADtEzqKA',
-    'AgADUwADtEzqKA',
     'AgADUgADtEzqKA',
+    'AgADUwADtEzqKA',
+    'AgADVAADtEzqKA',
+
+    // https://t.me/addstickers/nanopeepo
+    'AgADWAIAAh_2ths',
+    'AgADbgIAAh_2ths',
+    'AgADbwIAAh_2ths',
+    'AgADcAIAAh_2ths',
     'AgADvwIAAh_2ths',
   ]
   if (poopStickers.includes((sticker as any).file_unique_id)) {
