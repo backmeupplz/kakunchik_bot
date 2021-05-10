@@ -15,6 +15,8 @@ export class User {
 
   @prop({ type: mongoose.Schema.Types.Mixed })
   pooped: PoopedObject
+  @prop({ required: true, default: 0 })
+  nailsClipped: number
 }
 
 // Get User model

@@ -55,6 +55,11 @@ bot.on('sticker', async (ctx) => {
     )
   }
 })
+bot.hears(/💅/g, async (ctx) => {
+  ctx.dbuser.nailsClipped++
+  await ctx.dbuser.save()
+  return ctx.reply(`Вы постригли ногти в ${ctx.dbuser.nailsClipped} раз.`)
+})
 
 // Log
 console.info('Bot is up and running')
